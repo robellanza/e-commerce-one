@@ -2,15 +2,16 @@
 const productos = [
     // Abrigos
     {
-        id: "abrigo-01",
-        titulo: "Abrigo 01",
-        imagen: "./img/abrigos/01.jpg",
-        categoria: {
-            nombre: "Abrigos",
-            id: "abrigos"
+        id: "abrigo-01", // Identificador del producto
+        titulo: "Abrigo 01", // Nombre del producto
+        imagen: "./img/abrigos/01.jpg", // Ruta de la imagen del producto
+        categoria: { // Categoría del producto
+            nombre: "Abrigos", // Nombre de la categoría
+            id: "abrigos" // Identificador de la categoría
         },
-        precio: 1000
+        precio: $1000 // Precio del producto
     },
+    // Repetimos la estructura anterior para cada uno de los productos
     {
         id: "abrigo-02",
         titulo: "Abrigo 02",
@@ -184,3 +185,47 @@ const productos = [
         precio: 1000
     }
 ];
+
+// Selecciona el elemento del DOM con el id "contenedor-productos" y lo guarda en la variable contenedorProductos
+const contenedorProductos = document.querySelector("#contenedor-productos");
+
+// Selecciona el primer elemento del DOM con la clase "botones-categorias" y lo guarda en la variable botonesCategorias
+const botonesCategorias = document.querySelector(".boton-categoria");
+
+// Define la función cargarProductos
+function cargarProductos() {
+
+    // Recorre el arreglo de objetos "productos" utilizando forEach y crea un div para cada producto
+    productos.forEach(producto => {
+
+        // Crea un elemento div y le agrega la clase "producto"
+        const div = document.createElement("div");
+        div.classList.add("producto");
+
+        // Agrega el código HTML para mostrar la imagen, título, precio y botón de agregar del producto actual
+        div.innerHTML = `
+            <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
+            <div class="producto-detalles">
+                <h3 class="producto-titulo">${producto.titulo}</h3>
+                <p class="producto-precio">${producto.precio}</p>
+                <button class="producto-agregar" id="${producto.id}">Agregar</button>
+            </div>
+        `;
+
+        // Agrega el div con la información del producto al contenedorProductos
+        contenedorProductos.append(div);
+
+    });
+}
+
+// Llama a la función cargarProductos para que muestre los productos en el HTML
+cargarProductos();
+
+botonesCategorias.forEach(boton => {
+    boton.addEventListenes("click", (e) => {
+
+        e.currentTarget.classList.add("active");
+
+    })
+})
+
