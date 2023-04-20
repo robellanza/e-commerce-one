@@ -187,11 +187,14 @@ const productos = [
     }
 ];
 
-
 const contenedorProductos = document.querySelector("#contenedor-productos"); // Selecciona el elemento del DOM con el id "contenedor-productos" y lo guarda en la variable contenedorProductos
+const botonesCategorias = document.querySelectorAll(".boton-categoria");// Selecciona todos los elementos del DOM con la clase "botones-categorias" y lo guarda en la variable botonesCategorias
+const tituloPrincipal = document.querySelector("#titulo-principal");
+let botonesAgregar = document.querySelectorAll(".producto-agregar");
+const numerito = document.querySelector("#numerito");
 
-// Selecciona todos los elementos del DOM con la clase "botones-categorias" y lo guarda en la variable botonesCategorias
-const botonesCategorias = document.querySelectorAll(".boton-categoria");
+
+
 
 // Define la función cargarProductos
 function cargarProductos(productosElegidos) {
@@ -219,6 +222,7 @@ function cargarProductos(productosElegidos) {
         contenedorProductos.append(div);
 
     });
+    actualizarBotenesAgregar();
 }
 
 // Llama a la función cargarProductos para que muestre los productos en el HTML
@@ -226,18 +230,67 @@ cargarProductos(productos);
 
 function menuCategoriaClick(e) {
     botonesCategorias.forEach(boton => boton.classList.remove("active"));
+
     e.currentTarget.classList.add("active");
 
     if (e.currentTarget.id != "todos") {
+        const productoCategoria = productos.find(producto => producto.categoria.id === e.currentTarget.id);
+
+        tituloPrincipal.innerText = productoCategoria.categoria.nombre;
         //queremos que solo traiga productos de esa categoria
         const productosBoton = productos.filter(producto => producto.categoria.id === e.currentTarget.id); //trae ID del elemento html
         cargarProductos(productosBoton);
     } else {
+        tituloPrincipal.innerText = "Todos los prodcutos";
         cargarProductos(productos)
     }
+
 }
 
 botonesCategorias.forEach(boton => {
     boton.addEventListener("click", menuCategoriaClick)
 });
+
+function actualizarBotenesAgregar() {
+    botonesAgregar = document.querySelectorAll(".producto-agregar"); //vuelve a buscar en el dom, todos los que existen, cada vez que carga
+
+    botonesAgregar.forEach(boton => {
+        boton.addEventListener("click", agregarAlCarrito);
+    })
+}
+
+// Array de productos - Lista de productos - Vector de productos
+// Se definen []
+const productosEnCarrito = [];
+
+
+function agregarAlCarrito(event) {
+
+    const idBoton = event.currentTarget.id;
+
+    // El código utiliza el método find() para buscar un objeto en un arreglo de productos 
+    // que tenga una propiedad id igual al valor de idBoton. Retorna el primer elemento que cumple con la condición de búsqueda.
+    const productoAgregado = productos.find(producto => producto.id == idBoton);
+
+    // Verifica si algún producto en el carrito tiene el mismo ID que el botón presionado
+    if (productosEnCarrito.some(producto => producto.id === idBoton)) {
+        //findIndex = obtiene el indece de un elemento en el Array que cumpla con la con
+        const index = productosEnCarrito.findIndex(producto => producto.id === idBoton); 
+
+        productosEnCarrito[index].cantidad++;
+    } else {
+        productoAgregado.cantidad = 1;
+        productosEnCarrito.push(productoAgregado); //push = AGREGA un elemento QUE QUERAMOS a un ARRAY
+    }
+    actualizarNumerito (); //se ejecuta
+
+    //se llama desde el carrito, se guarda el array en el localStorage, para llevar a la pagina carrito
+    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito)); 
+}
+//actuzaliza el numerito cada vez que se agrega un producto al carrito, suma cantidad de ese producto que hay en el array
+function actualizarNumerito() {
+    let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
+
+    numerito.innerText = nuevoNumerito; 
+}
 

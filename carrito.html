@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="./css/main.css">
 
+
 </head>
 
 <body>
@@ -45,9 +46,9 @@
         <main>
             <h2 class="titulo-principal">Carrito</h2>
             <div class="contenedor-carrito">
-                <p class="carrito-vacio">Tu carrito esta vacio. <i class="bi bi-emoji-frown"></i> </p>
+                <p id="carrito-vacio" class="carrito-vacio">Tu carrito esta vacio. <i class="bi bi-emoji-frown"></i> </p>
 
-                <div class="carrito-productos disable">
+                <div id="carrito-productos" class="carrito-productos disable">
 
                     <div class="carrito-producto">
                         <img class="carrito-producto-imagen" src="./img/abrigos/01.jpg" alt="">
@@ -91,7 +92,7 @@
 
                     </div>
                 </div>
-                <div class="carrito-acciones disable">
+                <div id="carrito-acciones" class="carrito-acciones disable">
                     <div class="carrito-acciones-izquierda">
                         <button class="carrito-acciones-vaciar">Vaciar carrito</button>
                     </div>
@@ -104,11 +105,14 @@
                     </div>
                 </div>
 
-                <p class="carrito-comprado disable">Muchas gracias por tu compra <i class="bi bi-emoji-laughing"></i> </p>
+                <p id="carrito-comprado" class="carrito-comprado disable">Muchas gracias por tu compra <i class="bi bi-emoji-laughing"></i> </p>
 
             </div>
         </main>
     </div>
+
+    <script src="./js/carrito.js"></script>
+
 </body>
 
 </html>
