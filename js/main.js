@@ -259,9 +259,21 @@ function actualizarBotenesAgregar() {
     })
 }
 
+let productosEnCarrito;
+
+
+const productosEnCarritoLS = JSON.parse(localStorage.getItem("productos-en-carrito"));
+
+if (productosEnCarritoLS){
+    productosEnCarrito = productosEnCarritoLS;
+    actualizarNumerito (); 
+}   else {
+    productosEnCarrito = [];
+}
+
 // Array de productos - Lista de productos - Vector de productos
 // Se definen []
-const productosEnCarrito = [];
+//const productosEnCarrito = [];
 
 
 function agregarAlCarrito(event) {
@@ -290,7 +302,6 @@ function agregarAlCarrito(event) {
 //actuzaliza el numerito cada vez que se agrega un producto al carrito, suma cantidad de ese producto que hay en el array
 function actualizarNumerito() {
     let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
-
     numerito.innerText = nuevoNumerito; 
 }
 
