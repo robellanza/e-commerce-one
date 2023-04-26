@@ -299,8 +299,8 @@ function agregarAlCarrito(event) {
 
 
     Swal.fire({
-        title: 'Producto agregado al carrito',
-        text: 'El producto ha sido agregado al carrito exitosamente.',
+        title: `${productoAgregado.titulo}`,
+        text: 'Ha sido agregado al carrito exitosamente.',
         icon: 'success',
         confirmButtonText: 'Aceptar'
     })
