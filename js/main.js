@@ -264,10 +264,10 @@ let productosEnCarrito;
 let productosEnCarritoLS = localStorage.getItem("productos-en-carrito");
 
 
-if (productosEnCarritoLS){
+if (productosEnCarritoLS) {
     productosEnCarrito = JSON.parse(productosEnCarritoLS);
-    actualizarNumerito (); 
-}   else {
+    actualizarNumerito();
+} else {
     productosEnCarrito = [];
 }
 
@@ -287,22 +287,22 @@ function agregarAlCarrito(event) {
     // Verifica si algún producto en el carrito tiene el mismo ID que el botón presionado
     if (productosEnCarrito.some(producto => producto.id === idBoton)) {
         //findIndex = obtiene el indece de un elemento en el Array que cumpla con la con
-        const index = productosEnCarrito.findIndex(producto => producto.id === idBoton); 
+        const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
 
         productosEnCarrito[index].cantidad++;
     } else {
         productoAgregado.cantidad = 1;
         productosEnCarrito.push(productoAgregado); //push = AGREGA un elemento QUE QUERAMOS a un ARRAY
     }
-    actualizarNumerito (); //se ejecuta
+    actualizarNumerito(); //se ejecuta
 
     //se llama desde el carrito, se guarda el array en el localStorage, para llevar a la pagina carrito
-    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito)); 
+    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
 }
 //actuzaliza el numerito cada vez que se agrega un producto al carrito, suma cantidad de ese producto que hay en el array
 function actualizarNumerito() {
     let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
-    numerito.innerText = nuevoNumerito; 
+    numerito.innerText = nuevoNumerito;
 }
 
 function agregarInfoFooter() {
@@ -314,6 +314,6 @@ function agregarInfoFooter() {
     var mensaje = "© " + fecha.getFullYear() + " RLB Shop ";
     //Insertamos el mensaje en el elemento del pie de página
     footerInfo.innerHTML = mensaje;
-  }
+}
 
-  document.addEventListener("DOMContentLoaded", agregarInfoFooter);
+document.addEventListener("DOMContentLoaded", agregarInfoFooter);
