@@ -305,3 +305,15 @@ function actualizarNumerito() {
     numerito.innerText = nuevoNumerito; 
 }
 
+function agregarInfoFooter() {
+    //Obtenemos la fecha actual
+    var fecha = new Date();
+    //Obtenemos el elemento del pie de página
+    var footerInfo = document.getElementById("footer-info");
+    //Creamos el mensaje con la fecha y el nombre del usuario
+    var mensaje = "© " + fecha.getFullYear() + " RLB Shop ";
+    //Insertamos el mensaje en el elemento del pie de página
+    footerInfo.innerHTML = mensaje;
+  }
+
+  document.addEventListener("DOMContentLoaded", agregarInfoFooter);
