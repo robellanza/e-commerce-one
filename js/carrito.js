@@ -9,6 +9,8 @@ const contenedorCarritoComprado = document.querySelector("#carrito-comprado");
 let botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar");
 const botonVaciar = document.querySelector ("#carrito-acciones-vaciar");
 const contenedorTotal = document.querySelector("#total");
+const botonComprar = document.querySelector ("#carrito-acciones-comprar");
+
 
 function cargarProductosCarrito(){
     if (productosEnCarrito && productosEnCarrito.length > 0){
@@ -97,4 +99,16 @@ function vaciarCarrito() {
 function actualizarTotal() {
     const totalCalculado = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0);
     total.innerText = `$${totalCalculado}`;
+}
+
+botonComprar.addEventListener("click", comprarCarrito );
+function comprarCarrito() {
+
+    productosEnCarrito.length = 0;
+    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+
+    contenedorCarritoVacio.classList.add("disable");
+    contenedorCarritoProductos.classList.add("disable");
+    contenedorCarritoAcciones.classList.add("disable");
+    contenedorCarritoComprado.classList.remove("disable");
 }
