@@ -296,6 +296,19 @@ function agregarAlCarrito(event) {
     }
     actualizarNumerito(); //se ejecuta
 
+
+
+    Swal.fire({
+        title: 'Producto agregado al carrito',
+        text: 'El producto ha sido agregado al carrito exitosamente.',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+    })
+
+
+
+
+
     //se llama desde el carrito, se guarda el array en el localStorage, para llevar a la pagina carrito
     localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
 }
