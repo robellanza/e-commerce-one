@@ -256,16 +256,16 @@ function actualizarBotenesAgregar() {
 
     botonesAgregar.forEach(boton => {
         boton.addEventListener("click", agregarAlCarrito);
-    })
+    });
 }
 
 let productosEnCarrito;
 
+let productosEnCarritoLS = localStorage.getItem("productos-en-carrito");
 
-const productosEnCarritoLS = JSON.parse(localStorage.getItem("productos-en-carrito"));
 
 if (productosEnCarritoLS){
-    productosEnCarrito = productosEnCarritoLS;
+    productosEnCarrito = JSON.parse(productosEnCarritoLS);
     actualizarNumerito (); 
 }   else {
     productosEnCarrito = [];
